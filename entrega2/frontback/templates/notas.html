@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Notas</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Notas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nota</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="note-list">
+                {% for grade in grades %}
+                <tr>
+                    <td>{{ grade.grade }}</td>
+                    <td><button class="btn" onclick="removeNote(this)">Remover</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="btn-container">
+            <button class="btn" onclick="addNote()">Adicionar Nota</button>
+        </div>
+    </div>
+
+    <script>
+        function addNote() {
+            const novaNota = prompt("Insira a nota:");
+            if (novaNota !== null) {
+                fetch("/notas", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({
+                        action: "add_note",
+                        nova_nota: novaNota,
+                    }),
+                }).then(() => {
+                    location.reload();  // Atualizar a página após adicionar a nota
+                });
+            }
+        }
+
+        function removeNote(button) {
+            const notaRemovida = button.parentNode.parentNode.cells[0].innerText;
+            fetch("/notas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    action: "remove_note",
+                    nota_removida: notaRemovida,
+                }),
+            }).then(() => {
+                location.reload();  // Atualizar a página após remover a nota
+            });
+        }
+
+    </script>
+</body>
+
+</html>
