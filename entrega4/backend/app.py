@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import sessionmaker
 import os
 import sys
+import pandas as pd
 from pycaret.regression import load_model, predict_model
 
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -24,7 +25,7 @@ class Output:
         self.prediction = prediction
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres123@localhost:5432/db_entrega4" 
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres123@db:5432/db_entrega4" 
 db.init_app(app)
 app.secret_key = 'your_secret_key'
 app.static_folder = 'static'

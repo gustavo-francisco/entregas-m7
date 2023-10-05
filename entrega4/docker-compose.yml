@@ -4,7 +4,7 @@ services:
 
   db:
     build:
-      context: ./database
+      context: ./backend/database
       dockerfile: Dockerfile
     restart: always
     environment:
@@ -14,11 +14,12 @@ services:
     ports:
       - 5432:5432
     container_name: meu-db
-  # app:
-  #   build: ./flask
-  #   restart: always
-  #   ports:
-  #     - 8000:8000
-  #   depends_on:
-  #     - db
-  #   container_name: meu-app
+
+  app:
+    build: ./backend
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    container_name: meu-app

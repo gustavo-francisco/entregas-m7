@@ -1,11 +1,13 @@
 FROM python:3.8-slim
 
-WORKDIR /
-
-COPY .  .
+WORKDIR /app
 
 RUN apt-get update && apt-get install -y libgomp1
 
+COPY . .
+
 RUN pip install -r requirements.txt
 
-CMD ["uvicorn", "minha_api:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 80
+
+CMD ["python", "app.py"]

@@ -2,49 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previsão de Renda Anual</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .input-container {
-            margin: 20px;
-        }
-
-        .input-label {
-            font-weight: bold;
-        }
-
-        .input-field {
-            padding: 5px;
-            width: 100px;
-        }
-
-        #output {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+    <!-- ... (seu código de cabeçalho) ... -->
 </head>
 
 <body>
     <h1>Previsão de Renda Anual</h1>
     <div class="input-container">
-        <label for="genero" class="input-label">Gênero:</label>
-        <input type="text" id="genero" class="input-field">
-    </div>
-    <div class="input-container">
         <label for="idade" class="input-label">Idade:</label>
         <input type="text" id="idade" class="input-field">
+    </div>
+    <div class="input-container">
+        <label for="gender_female" class="input-label">Gênero (Feminino):</label>
+        <input type="radio" id="gender_female" name="gender" value="1" class="input-field">
+    </div>
+    <div class="input-container">
+        <label for="gender_male" class="input-label">Gênero (Masculino):</label>
+        <input type="radio" id="gender_male" name="gender" value="0" class="input-field">
     </div>
     <button onclick="calcularPrevisao()">Calcular Previsão</button>
     <div id="output"></div>
@@ -52,13 +25,14 @@
     <script>
         async function calcularPrevisao() {
             // Obtenha os valores inseridos nos campos de entrada
-            var genero = document.getElementById("genero").value;
             var idade = document.getElementById("idade").value;
+            var genero = document.querySelector('input[name="gender"]:checked').value;
 
             // Enviar solicitação ao servidor com os valores para obter a previsão da renda anual
             var data = {
-                genero: genero,
-                idade: idade
+                Age: idade,
+                Gender_Female: genero === "1" ? 1 : 0,
+                Gender_Male: genero === "0" ? 1 : 0
             };
 
             const response = await fetch("/predict", {
