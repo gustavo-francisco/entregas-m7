@@ -19,9 +19,11 @@ Você pode utilizar a imagem Docker que criamos para executar a API em um contê
 Você pode acessar a API em http://127.0.0.1:8000 após buildar a imagem do docker. <br>
 Você pode usar uma ferramenta como o Postman para fazer solicitações POST para esta URL com os dados dos clientes e obter previsões.<br>
 A API aceita solicitações JSON no seguinte formato: <br>
-{ <br>
-    "Gender": 1, <br>
-    "Age": 30 <br>
-}
+```json
+   {
+    "Gender": 1,
+    "Age": 30
+   }
+```
 ## Escolha do Modelo de Machine Learning
 O modelo de regressão foi escolhido para este projeto com base na tarefa de previsão da renda anual de um cliente. A escolha justifica-se pela natureza de seu problema, a previsão de uma variável contínua.
