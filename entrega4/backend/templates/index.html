@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão de Renda Anual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .input-container {
+            margin: 20px;
+        }
+
+        .input-label {
+            font-weight: bold;
+        }
+
+        .input-field {
+            padding: 5px;
+            width: 100px;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Previsão de Renda Anual</h1>
+    <div class="input-container">
+        <label for="genero" class="input-label">Gênero:</label>
+        <input type="text" id="genero" class="input-field">
+    </div>
+    <div class="input-container">
+        <label for="idade" class="input-label">Idade:</label>
+        <input type="text" id="idade" class="input-field">
+    </div>
+    <button onclick="calcularPrevisao()">Calcular Previsão</button>
+    <div id="output"></div>
+
+    <script>
+        async function calcularPrevisao() {
+            // Obtenha os valores inseridos nos campos de entrada
+            var genero = document.getElementById("genero").value;
+            var idade = document.getElementById("idade").value;
+
+            // Enviar solicitação ao servidor com os valores para obter a previsão da renda anual
+            var data = {
+                genero: genero,
+                idade: idade
+            };
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                var previsao = result.prediction;
+
+                // Exiba a previsão na página
+                var outputDiv = document.getElementById("output");
+                outputDiv.innerHTML = "Previsão de Renda Anual: $" + previsao.toFixed(2);
+            } else {
+                console.error("Erro ao fazer a solicitação.");
+            }
+        }
+    </script>
+</body>
+
+</html>
