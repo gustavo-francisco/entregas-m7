@@ -1,27 +1,30 @@
-# Projeto Entrega 3
-### O projeto Entrega 3 é a construção de um modelo preditivo que nos retorna a renda anual de um cliente com base no seu gênero e idade.
-## Neste presente arquivo, iremos detalhar o processo de execução do projeto Entrega 3.
-### O primeiro passo, é atender todos os requisitos, sendo eles: 
-Python 3.x <br>
-Jupyter Notebook (opcional, mas útil para desenvolvimento) <br>
-Bibliotecas Python: pandas, pycaret <br>
-Google Colab (para executar o código no ambiente do Colab) <br>
-Arquivo CSV do conjunto de dados escolhido para a análise dos dados e criação do modelo. O conjunto de dados escolhido para este projeto foi o "Customer Segmentation" que, em suma, nos mostra um sistema de pontuação com base em seus comportamentos e dados de compra.
-## Como executar o projeto Entrega 3?
-1. Clone o repositório ou faça o download dos arquivos. <br>
-2. Utilizando a Imagem Docker <br>
-Você pode utilizar a imagem Docker que criamos para executar a API em um contêiner Docker. Siga as etapas abaixo para baixar e executar o contêiner: <br>
-2.1. Certifique-se de que você tenha o Docker instalado em sua máquina. Se você ainda não o tem instalado, siga as instruções em [Docker Installation Guide](https://docs.docker.com/get-docker/) para instalá-lo. <br>
-2.2. Abra um terminal e execute o seguinte comando para baixar a imagem Docker do Docker Hub: <br>
-`docker pull gustavvnp/entregas-m7:v3.0` <br>
-2.3 Após o download, execute o seguinte comando no terminal: <br>
-`docker run -d -p 8000:8000 seunomeusuario/minha_api:latest` <br>
-Você pode acessar a API em http://127.0.0.1:8000 após buildar a imagem do docker. <br>
-Você pode usar uma ferramenta como o Postman para fazer solicitações POST para esta URL com os dados dos clientes e obter previsões.<br>
-A API aceita solicitações JSON no seguinte formato: <br>
-{ <br>
-    "Gender": 1, <br>
-    "Age": 30 <br>
-}
-## Escolha do Modelo de Machine Learning
-O modelo de regressão foi escolhido para este projeto com base na tarefa de previsão da renda anual de um cliente. A escolha justifica-se pela natureza de seu problema, a previsão de uma variável contínua.
+# Projeto Entrega 4
+Este é um projeto que consiste em um sistema de autenticação construído com Flask e Werkzeug Security, que posteriormente consome uma API de um modelo preditivo de regressão desenvolvido com o PyCaret. O objetivo principal deste projeto é prever a renda anual de um consumidor com base em seu gênero e idade. Além disso, o front-end da aplicação foi desenvolvido usando HTML e CSS. Posteriormente, o projeto foi dockerizado e implantado em um servidor EC2 na AWS, conforme vídeo de demonstração.
+
+# Funcionalidades Principais
+Autenticação de Usuários: O sistema possui autenticação de usuários para garantir que apenas usuários autorizados possam acessar as funcionalidades do aplicativo. <br>
+
+Modelo de Regressão de Renda: O projeto inclui um modelo preditivo de regressão treinado com base no gênero e idade do consumidor para prever sua renda anual. <br>
+
+Front-End Interativo: A interface de usuário foi criada usando HTML e CSS para fornecer uma experiência amigável e intuitiva para os usuários. <br>
+
+Dockerização: O aplicativo foi dockerizado para garantir a portabilidade e facilidade de implantação. <br>
+
+Implantação na AWS: O aplicativo foi implantado em um servidor EC2 da AWS para torná-lo acessível na web. <br>
+
+# Requisitos de Instalação
+Para executar este projeto localmente, você precisará das seguintes dependências instaladas:<br>
+Python (versão 3.7 ou superior)<br>
+Flask<br>
+Werkzeug Security<br>
+PyCaret<br>
+Docker<br>
+Ou, utilize o comando `pip install requirements.txt` na pasta backend.
+
+
+# Execução local para testes
+Para executar o projeto localmente, primeiro, crie um clone deste repositório. <br>
+Após isso, acesse a pasta raiz (entrega4) <br>
+Execute o comando `docker compose up` <br>
+Então, acesse o localhost na porta definida (80) na rota signup, ou seja, localhost:80/signup. <br>
+Depois dessa etapa o fluxo de telas é bem fluído, você cria uma conta, loga e realiza os inputs para a predição. <br>
